@@ -8,7 +8,7 @@ AllCops:
     - 'package/**/*'
     - 'spec/fixtures/**/*'
     - 'tmp/**/*'
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.0
   
 Documentation:
   Enabled: false
