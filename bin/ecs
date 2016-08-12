@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+# frozen_string_literal: true
+
+require 'ecsctrl'
+require 'optparse'
+require 'logger'
+
+DEBUG = true
+
+log = Logger.new(STDOUT)
+log.level = Logger::WARN
+
+begin
+  options = { force: false }
+  OptionParser.new do |opt|
+    opt.on('--service SERVICE') { |o| options[:service] = o }
+    opt.on('--task TASK') { |o| options[:task] = o }
+    opt.on('--cluster CLUSTER') { |o| options[:cluster] = o }
+    opt.on('--profile PROFILE') { |o| options[:profile] = o }
+    opt.on('--force') { |o| options[:force] = o }
+  end.parse!
+  options[:cmd] = ARGV[0]
+  EcsCtrl::Main.new.run options
+rescue => err
+  if DEBUG
+    log.fatal(err)
+  else
+    log.fatal(err.message)
+  end
+end
