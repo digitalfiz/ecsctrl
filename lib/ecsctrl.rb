@@ -4,7 +4,6 @@ require 'logger'
 module EcsCtrl
   class Main
     def init(options)
-      puts "Starting with profile #{options[:profile]}..."
     end
 
     def run(options)
